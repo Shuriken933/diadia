@@ -11,8 +11,6 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  * @version 0.1
  */
 
-
-
 public class Partita {
 
 	private boolean finita;
