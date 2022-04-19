@@ -8,7 +8,7 @@ package it.uniroma3.diadia.giocatore;
  */
 public class Giocatore {
 	
-	public static final int CFU_INIZIALI = 2;
+	public static final int CFU_INIZIALI = 10;
 	private int cfu;
 	private Borsa borsa;
 	
