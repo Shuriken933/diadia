@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -13,7 +14,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * Questa e' la classe principale crea e istanzia tutte le altre
  *
  * @author  docente di POO 
- *         (da un'idea di Michael Kolling and David J. Barnes) 
+ *         (da un'idea di Michael Kolling e David J. Barnes) 
  *          
  * @version base
  */
@@ -30,7 +31,7 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "posa", "prendi"};
+	//static final private String[] elencoComandi = {"vai", "aiuto", "fine", "posa", "prendi"};
 
 	private Partita partita;
 	private IOConsole io;
@@ -58,9 +59,23 @@ public class DiaDia {
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
 	 */
 	private boolean processaIstruzione(String istruzione) {
-		Comando comandoDaEseguire = new Comando(istruzione);
+		Comando comandoDaEseguire;
+		FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica();
+		
+		comandoDaEseguire = factory.costruisciComando(istruzione);
+		comandoDaEseguire.esegui(this.partita);
+		if (this.partita.vinta())
 
-		if(comandoDaEseguire.getNome() == null) {
+		System.out.println("Hai vinto!");
+		if (!this.partita.giocatoreIsVivo())
+
+		System.out.println("Hai esaurito i CFU...");
+
+		return this.partita.isFinita();
+		
+		
+
+		/*if(comandoDaEseguire.getNome() == null) {
 			io.mostraMessaggio("Devi inserire un comando");
 			return false;
 		}
@@ -93,7 +108,7 @@ public class DiaDia {
 			io.mostraMessaggio("Hai vinto!");
 			return true;
 		} else
-			return false;
+			return false;*/
 	}   
 
 
@@ -102,7 +117,7 @@ public class DiaDia {
 	/**
 	 * Posa un oggetto se la stanza ha ancora spazio
 	 */
-	private void posa(String nomeAttrezzo) {
+	/*private void posa(String nomeAttrezzo) {
 		if(!this.partita.getGiocatore().getBorsa().hasAttrezzo(nomeAttrezzo)) {
 			io.mostraMessaggio("Attrezzo "+nomeAttrezzo+" non presente nella borsa!");
 			return;
@@ -110,12 +125,12 @@ public class DiaDia {
 		this.partita.getStanzaCorrente().addAttrezzo(this.partita.getGiocatore().getBorsa().getAttrezzo(nomeAttrezzo));
 		this.partita.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
 		io.mostraMessaggio("Attrezzo "+nomeAttrezzo+" posato!");
-	}
+	}*/
 
 	/**
 	 * Prendi un oggetto se la tua borsa non è piena
 	 */
-	private void prendi(String nomeAttrezzo) {
+	/*private void prendi(String nomeAttrezzo) {
 		if(!this.partita.getStanzaCorrente().hasAttrezzo(nomeAttrezzo)) {
 			io.mostraMessaggio("Attrezzo "+nomeAttrezzo+" non presente!");
 			return;
@@ -124,21 +139,21 @@ public class DiaDia {
 		this.partita.getGiocatore().getBorsa().addAttrezzo(attrezzo);
 		this.partita.getStanzaCorrente().removeAttrezzo(attrezzo);
 		io.mostraMessaggio("Attrezzo "+nomeAttrezzo+" preso!");
-	}
+	}*/
 
 	/**
 	 * Stampa informazioni di aiuto.
 	 */
-	private void aiuto() {
+	/*private void aiuto() {
 		for(int i=0; i< elencoComandi.length; i++) 
 			io.mostraMessaggio(elencoComandi[i]+" ");
-	}
+	}*/
 
 	/**
 	 * Cerca di andare in una direzione. Se c'e' una stanza ci entra 
 	 * e ne stampa il nome, altrimenti stampa un messaggio di errore
 	 */
-	private void vai(String direzione) {
+	/*private void vai(String direzione) {
 		if(direzione==null)
 			io.mostraMessaggio("Dove vuoi andare ?");
 		Stanza prossimaStanza = null;
@@ -151,14 +166,14 @@ public class DiaDia {
 			this.partita.getGiocatore().setCfu(cfu--);
 		}
 		io.mostraMessaggio(this.partita.getStanzaCorrente().getDescrizione());
-	}
+	}*/
 
 	/**
 	 * Comando "Fine".
 	 */
-	private void fine() {
+	/*private void fine() {
 		io.mostraMessaggio("Grazie di aver giocato!");  // si desidera smettere
-	}
+	}*/
 
 	public static void main(String[] argc) {
 		IOConsole ioConsole = new IOConsole();
