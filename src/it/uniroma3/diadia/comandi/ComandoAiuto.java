@@ -27,4 +27,15 @@ public class ComandoAiuto implements Comando {
 		this.io = console;
 	}
 
+	@Override
+	public String getNome() {
+		return "aiuto";
+	}
+
+	@Override
+	public String getParametro() {
+		return "";
+		
+	}
+
 }

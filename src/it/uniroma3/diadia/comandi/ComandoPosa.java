@@ -23,12 +23,22 @@ public class ComandoPosa implements Comando {
 	@Override
 	public void setParametro(String parametro) {
 		this.nomeAttrezzo = parametro;
-
 	}
 
 	@Override
 	public void setIO(IO console) {
 		this.io = console;
 	}
+	
+	@Override
+	public String getNome() {
+		return "posa";
+	}
+
+	@Override
+	public String getParametro() {
+		return this.nomeAttrezzo;
+	}
+	
 
 }

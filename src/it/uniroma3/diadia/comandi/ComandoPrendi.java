@@ -17,9 +17,15 @@ public class ComandoPrendi implements Comando {
 			return;
 		}
 		Attrezzo attrezzo = partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo);
-		partita.getGiocatore().getBorsa().addAttrezzo(attrezzo);
-		partita.getStanzaCorrente().removeAttrezzo(attrezzo);
-		this.io.mostraMessaggio("Attrezzo "+nomeAttrezzo+" preso!");
+		if(partita.getGiocatore().getBorsa().addAttrezzo(attrezzo)) {
+			partita.getStanzaCorrente().removeAttrezzo(attrezzo);
+			this.io.mostraMessaggio("Attrezzo "+nomeAttrezzo+" preso!");
+		}
+		else {
+			this.io.mostraMessaggio("Attrezzo "+nomeAttrezzo+" NON preso!");
+		}
+		
+		
 	}
 
 	@Override
@@ -31,6 +37,16 @@ public class ComandoPrendi implements Comando {
 	@Override
 	public void setIO(IO console) {
 		this.io = console;
+	}
+	
+	@Override
+	public String getNome() {
+		return "prendi";
+	}
+
+	@Override
+	public String getParametro() {
+		return this.nomeAttrezzo;
 	}
 
 }

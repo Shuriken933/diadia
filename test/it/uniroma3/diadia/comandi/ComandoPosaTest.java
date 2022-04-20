@@ -25,7 +25,7 @@ public class ComandoPosaTest {
 	public void setUp() throws Exception {
 		this.io = new IOConsole();
 		this.partita = new Partita();
-		this.attrezzoDaPosare = new Attrezzo("attrezzoDaPosare", 5);
+		this.attrezzoDaPosare = new Attrezzo("attrezzoDaPosare", 1);
 		this.partita.getGiocatore().getBorsa().addAttrezzo(attrezzoDaPosare);
 	}
 	
