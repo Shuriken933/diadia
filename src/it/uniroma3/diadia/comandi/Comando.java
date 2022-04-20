@@ -14,4 +14,7 @@ public interface Comando {
 	void setParametro(String parametro);
 
 	void setIO(IO console);
+	
+	String getNome();
+	String getParametro();
 }
