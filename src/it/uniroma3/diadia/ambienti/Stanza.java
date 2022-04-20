@@ -15,7 +15,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class Stanza {
 	
 	static final private int NUMERO_MASSIMO_DIREZIONI = 4;
-	static final public int NUMERO_MASSIMO_ATTREZZI = 10;
+	final public static int NUMERO_MASSIMO_ATTREZZI = 10;
 	
 	private String nome;
     private Attrezzo[] attrezzi;
