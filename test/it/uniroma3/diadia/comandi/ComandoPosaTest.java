@@ -5,24 +5,25 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.giocatore.Borsa;
-import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class ComandoPosaTest {
 	
 	private static final String ATTREZZO = "attrezzoDiTest";
+	private IO io;
 	
-	Comando comandoDaEseguire;
-	ComandoPosa comandoPosa;
-	Partita partita;
-	String istruzione;
-	Attrezzo attrezzoDaPosare;
+	private Comando comandoDaEseguire;
+	private Partita partita;
+	private String istruzione;
+	private Attrezzo attrezzoDaPosare;
 
 	@Before
 	public void setUp() throws Exception {
+		this.io = new IOConsole();
 		this.partita = new Partita();
 		this.attrezzoDaPosare = new Attrezzo("attrezzoDaPosare", 5);
 		this.partita.getGiocatore().getBorsa().addAttrezzo(attrezzoDaPosare);
@@ -61,7 +62,7 @@ public class ComandoPosaTest {
 	private void inputDellUtente(String ordine) {
 		FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica();
 		istruzione = ordine;
-		comandoDaEseguire = factory.costruisciComando(istruzione);
+		comandoDaEseguire = factory.costruisciComando(istruzione, io);
 	}
 
 
