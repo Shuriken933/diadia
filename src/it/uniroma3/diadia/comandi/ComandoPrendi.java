@@ -1,36 +1,36 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.Comando;
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class ComandoPrendi implements Comando {
-	private String attrezzo;
 
-	public ComandoPrendi(String attrezzo) {
-		this.attrezzo = attrezzo;
-	}
+	private IO io;
+	private String nomeAttrezzo;
 
-	/**
-	 * Prendi un oggetto se la tua borsa non è piena
-	 */
 	@Override
 	public void esegui(Partita partita) {
-		if(!partita.getStanzaCorrente().hasAttrezzo(this.attrezzo)) {
-			System.out.println("Attrezzo "+this.attrezzo+" non presente!");
-			//io.mostraMessaggio("Attrezzo "+this.attrezzo+" non presente!");
+
+		if(!partita.getStanzaCorrente().hasAttrezzo(nomeAttrezzo)) {
+			this.io.mostraMessaggio("Attrezzo "+nomeAttrezzo+" non presente!");
 			return;
 		}
-		Attrezzo attrezzo = partita.getStanzaCorrente().getAttrezzo(this.attrezzo);
+		Attrezzo attrezzo = partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo);
 		partita.getGiocatore().getBorsa().addAttrezzo(attrezzo);
 		partita.getStanzaCorrente().removeAttrezzo(attrezzo);
-		System.out.println("Attrezzo "+this.attrezzo+" preso!");
-		//io.mostraMessaggio("Attrezzo "+this.attrezzo+" preso!");
+		this.io.mostraMessaggio("Attrezzo "+nomeAttrezzo+" preso!");
 	}
 
 	@Override
 	public void setParametro(String parametro) {
-		this.attrezzo = parametro;
+		this.nomeAttrezzo = parametro;
+
+	}
+
+	@Override
+	public void setIO(IO console) {
+		this.io = console;
 	}
 
 }
