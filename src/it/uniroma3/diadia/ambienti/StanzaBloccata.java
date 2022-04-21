@@ -42,9 +42,8 @@ public class StanzaBloccata extends Stanza {
 
 	@Override
 	public String getDescrizione() {
-		
-		return this.toString() + "\nLa direzione bloccata �" + this.direzioneBloccata;
-		
+		return this.toString() + "\nLa direzione bloccata è " + this.direzioneBloccata +
+				"\nL'oggetto sbloccante è " + this.attrezzoSbloccante;
 	}
 
 }
