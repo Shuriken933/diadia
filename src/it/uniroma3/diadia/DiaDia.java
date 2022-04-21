@@ -43,9 +43,9 @@ public class DiaDia {
 
 		io.mostraMessaggio(MESSAGGIO_BENVENUTO);
 		do {
-			io.mostraMessaggio("");
+			this.io.mostraMessaggio("");
 			istruzione = this.io.leggiRiga();
-			io.mostraMessaggio("");
+			this.io.mostraMessaggio("");
 		}while (!processaIstruzione(istruzione));
 	}   
 
@@ -65,9 +65,9 @@ public class DiaDia {
 		comandoDaEseguire.esegui(this.partita);
 
 		if (this.partita.vinta())
-			System.out.println("Hai vinto!");
+			this.io.mostraMessaggio("Hai vinto!");
 		if (!this.partita.giocatoreIsVivo())
-			System.out.println("Hai esaurito i CFU...");
+			this.io.mostraMessaggio("Hai esaurito i CFU...");
 
 		return this.partita.isFinita();
 	}

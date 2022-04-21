@@ -34,31 +34,16 @@ public class StanzaBloccata extends Stanza {
 					}		
 					else {
 						s.append("Direzione bloccata!");
-						super.getDescrizione();
+						this.getDescrizione();
 					}
 
 		return stanza;
 	}
 
-
-	//	public Stanza getStanzaAdiacente(String direzione) {
-	//        
-	//		StringBuilder s = new StringBuilder();
-	//		if(direzione != this.direzioneBloccata)
-	//			return super.getStanzaAdiacente(direzione);
-	//		else if(!super.hasAttrezzo(attrezzoSbloccante))
-	//			s.append("Direzione bloccata!");
-	//		else s.append("Direzione sbloccata!");
-	//		return super.getStanzaAdiacente(direzioneBloccata);			
-	//			
-	//	}
-
 	@Override
 	public String getDescrizione() {
 		
-		StringBuilder s = new StringBuilder();
-		
-		return this.toString();
+		return this.toString() + "\nLa direzione bloccata è" + this.direzioneBloccata;
 		
 	}
 
