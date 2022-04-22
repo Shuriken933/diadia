@@ -12,15 +12,12 @@ public class StanzaBloccataTest {
 	
 	private StanzaBloccata stanzaBloccata;
 	private Stanza stanzaAdiacente;
-	private Partita partita;
 
 	@Before
 	public void setUp() throws Exception {
-		this.partita = new Partita();
 		this.stanzaBloccata = new StanzaBloccata("stanza bloccata");
 		this.stanzaAdiacente = new Stanza("stanza adiacente");
 		this.stanzaBloccata.impostaStanzaAdiacente("nord", stanzaAdiacente);
-		this.partita.setStanzaCorrente(stanzaBloccata);
 	}
 
 	@Test
@@ -33,6 +30,13 @@ public class StanzaBloccataTest {
 		Attrezzo attrezzoSbloccante = new Attrezzo("chiave", 1);
 		this.stanzaBloccata.addAttrezzo(attrezzoSbloccante);
 		assertEquals("stanza adiacente", this.stanzaBloccata.getStanzaAdiacente("nord").getNome());
+	}
+	
+	@Test
+	public void test_conAttrezzoSbagliato() {
+		Attrezzo attrezzoSbloccante = new Attrezzo("manopola", 1);
+		this.stanzaBloccata.addAttrezzo(attrezzoSbloccante);
+		assertEquals(null, this.stanzaBloccata.getStanzaAdiacente("nord"));
 	}
 	
 	
