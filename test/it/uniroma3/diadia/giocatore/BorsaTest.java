@@ -1,6 +1,9 @@
 package it.uniroma3.diadia.giocatore;
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -78,6 +81,35 @@ public class BorsaTest {
 		this.borsa.removeAttrezzo(ATTREZZO);
 		assertEquals(0, this.borsa.getPeso());
 		assertFalse(this.borsa.hasAttrezzo(ATTREZZO));
+	}
+	
+	@Test
+	public void testComparatorePeso() {
+		creaAttrezzoEAggiungiBorsa(this.borsa, "ascia", 4);
+		creaAttrezzoEAggiungiBorsa(this.borsa, "osso", 1);
+		creaAttrezzoEAggiungiBorsa(this.borsa, "chiave", 3);
+		
+		List<Attrezzo> attrezziOrdinatiPerPeso = new ArrayList<Attrezzo>();
+		attrezziOrdinatiPerPeso = this.borsa.getContenutoOrdinatoPerPeso();
+		
+		assertEquals("osso", attrezziOrdinatiPerPeso.get(0).getNome());
+		assertEquals("chiave", attrezziOrdinatiPerPeso.get(1).getNome());
+		assertEquals("ascia", attrezziOrdinatiPerPeso.get(2).getNome());
+	}
+	
+	@Test
+	public void testComparatoreNome_conPesiUguali() {
+		creaAttrezzoEAggiungiBorsa(this.borsa, "chiave", 2);
+		creaAttrezzoEAggiungiBorsa(this.borsa, "ascia", 2);
+		creaAttrezzoEAggiungiBorsa(this.borsa, "osso", 2);
+		
+		List<Attrezzo> attrezziOrdinatiPerPeso = new ArrayList<Attrezzo>();
+		attrezziOrdinatiPerPeso = this.borsa.getContenutoOrdinatoPerPeso();
+		
+		assertEquals("ascia", attrezziOrdinatiPerPeso.get(0).getNome());
+		assertEquals("chiave", attrezziOrdinatiPerPeso.get(1).getNome());
+		assertEquals("osso", attrezziOrdinatiPerPeso.get(2).getNome());
+		
 	}
 	
 	
