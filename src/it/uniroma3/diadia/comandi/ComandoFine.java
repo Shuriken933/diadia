@@ -5,11 +5,13 @@ import it.uniroma3.diadia.Partita;
 
 public class ComandoFine implements Comando {
 	
+	static final public String MESSAGGIO_FINE = "Grazie di aver giocato!";
+	public static final String NOME = "fine";	
 	private IO io;
 
 	@Override
 	public void esegui(Partita partita) {
-			this.io.mostraMessaggio("Grazie di aver giocato!");  // si desidera smettere
+			this.io.mostraMessaggio(MESSAGGIO_FINE);  // si desidera smettere
 			partita.isFinita();
 	}
 
@@ -25,7 +27,7 @@ public class ComandoFine implements Comando {
 	
 	@Override
 	public String getNome() {
-		return "fine";
+		return NOME;
 		
 	}
 
