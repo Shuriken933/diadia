@@ -1,10 +1,12 @@
 package it.uniroma3.diadia.giocatore;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -40,9 +42,9 @@ public class Borsa{
 	 */
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
-		//this.attrezzi = new Attrezzo[10]; // speriamo che bastino...
+
 		this.attrezzi = new ArrayList<Attrezzo>();
-		//this.numeroAttrezzi = 0;
+		
 	}
 
 	/**
@@ -57,10 +59,7 @@ public class Borsa{
 		if (this.attrezzi.size()==10) {
 			return false;
 		}
-		
-		//this.attrezzi[this.numeroAttrezzi] = attrezzo;
 		this.attrezzi.add(attrezzo);
-		//this.numeroAttrezzi++;
 		return true;
 	}
 	
@@ -134,18 +133,30 @@ public class Borsa{
 	
 	
 	public List<Attrezzo> getContenutoOrdinatoPerPeso() {
-		// List<Attrezzo> attrezziOrdinatiPerPeso = new ArrayList<Attrezzo>();
 		ComparatorePerPeso comparator = new ComparatorePerPeso();
 		Collections.sort(this.attrezzi, comparator);
 		return this.attrezzi;
 	}
 	
-	/*public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
-		
-	}*/
 	
+	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
+		SortedSet<Attrezzo> attrezziOrdinatiPerNome = new TreeSet<Attrezzo>();
+		attrezziOrdinatiPerNome.addAll(this.attrezzi);
+		return attrezziOrdinatiPerNome;
+	}
+	
+	public SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
+		SortedSet<Attrezzo> attrezziOrdinatiPerPeso = new TreeSet<Attrezzo>(new ComparatorePerPeso());
+		attrezziOrdinatiPerPeso.addAll(this.attrezzi);
+		return attrezziOrdinatiPerPeso;
+	}
 	
 
+	/**
+	 * Restituisce la descrizione della borsa
+	 * @see Attrezzo
+	 * @return String
+	 */
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 
@@ -155,16 +166,13 @@ public class Borsa{
 			for(Attrezzo attrezzo : this.attrezzi) {
 				s.append(attrezzo.toString()+ " ");
 			}
-			
-			/*for (int i= 0; i<this.numeroAttrezzi; i++) {
-				s.append(attrezzi[i].toString()+" ");
-			}*/
 		}
 		else {
 			s.append("Borsa vuota");
 		}
 		return s.toString();
 	}
+	
 
 
 	

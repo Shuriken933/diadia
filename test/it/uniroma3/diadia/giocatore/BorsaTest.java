@@ -2,7 +2,10 @@ package it.uniroma3.diadia.giocatore;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -109,11 +112,40 @@ public class BorsaTest {
 		assertEquals("ascia", attrezziOrdinatiPerPeso.get(0).getNome());
 		assertEquals("chiave", attrezziOrdinatiPerPeso.get(1).getNome());
 		assertEquals("osso", attrezziOrdinatiPerPeso.get(2).getNome());
+	}
+	
+	@Test
+	public void testComparatorePerNome() {
+		creaAttrezzoEAggiungiBorsa(this.borsa, "chiave", 2);
+		creaAttrezzoEAggiungiBorsa(this.borsa, "ascia", 3);
+		creaAttrezzoEAggiungiBorsa(this.borsa, "osso", 1);
 		
+		SortedSet<Attrezzo> attrezziOrdinatiPerNome = new TreeSet<Attrezzo>();
+		attrezziOrdinatiPerNome = this.borsa.getContenutoOrdinatoPerNome();
+		
+		Iterator<Attrezzo> it = attrezziOrdinatiPerNome.iterator();
+		
+		assertSame("ascia", it.next().getNome());
+		assertSame("chiave", it.next().getNome());
+		assertSame("osso", it.next().getNome());
+	}
+	
+	@Test
+	public void testComparatoreNomeSortedSet_conPesiUguali() {
+		creaAttrezzoEAggiungiBorsa(this.borsa, "osso", 2);
+		creaAttrezzoEAggiungiBorsa(this.borsa, "ascia", 2);
+		
+		SortedSet<Attrezzo> attrezziOrdinatiPerPeso = new TreeSet<Attrezzo>();
+		attrezziOrdinatiPerPeso = this.borsa.getSortedSetOrdinatoPerPeso();
+		
+		Iterator<Attrezzo> it = attrezziOrdinatiPerPeso.iterator();
+		
+		assertSame("ascia", it.next().getNome());
+		assertSame("osso", it.next().getNome());
 	}
 	
 	
-	
+	/*metodo di supporto*/
 	private Attrezzo creaAttrezzoEAggiungiBorsa(Borsa borsa2, String nomeAttrezzo, int peso) {
 		Attrezzo attrezzo = new Attrezzo(nomeAttrezzo, peso);
 		borsa.addAttrezzo(attrezzo);
