@@ -3,6 +3,8 @@ package it.uniroma3.diadia.ambienti;
 
 import static org.junit.Assert.*;
 
+import java.util.Set;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -126,9 +128,9 @@ public class StanzaTest {
 
 	/*metodo di appoggio*/
 	
-	private void assertNotContains(String[] direzioni, String direzioneNuova) {
+	private void assertNotContains(Set<String> set, String direzioneNuova) {
 		boolean contiene = false;
-		for(String direzione: direzioni) {
+		for(String direzione: set) {
 			if (direzione != null && direzione.equals(direzioneNuova)) {
 				contiene = true;
 			}

@@ -26,10 +26,10 @@ public class StanzaBloccata extends Stanza {
 		for(int i=0; i<this.numeroStanzeAdiacenti; i++)
 			if (this.direzioni[i].equals(direzione))
 				if(direzione != this.direzioneBloccata)
-					stanza = super.stanzeAdiacenti[i];
+					stanza = super.direzione2stanzaAdiacente[i];
 				else
 					if(super.hasAttrezzo(attrezzoSbloccante)) {
-						stanza = super.stanzeAdiacenti[i];
+						stanza = super.direzione2stanzaAdiacente[i];
 						s.append("Direzione sbloccata!");
 					}		
 					else {
