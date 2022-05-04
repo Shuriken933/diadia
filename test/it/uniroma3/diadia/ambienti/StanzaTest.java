@@ -84,7 +84,7 @@ public class StanzaTest {
 	
 	@Test
 	public void testGetDirezioni_vuoto() {
-		assertArrayEquals(new String[0], this.stanza.getDirezioni());
+		assertArrayEquals(new String[0], this.stanza.getDirezioni().toArray());
 	}
 	
 	@Test
@@ -92,7 +92,7 @@ public class StanzaTest {
 		creaStanzaEImpostaAdiacente(this.stanza, STANZA_ADIACENTE, NORD);
 		String[] direzioni = new String[1];
 		direzioni[0] = NORD;
-		assertArrayEquals(direzioni, this.stanza.getDirezioni());
+		assertArrayEquals(direzioni, this.stanza.getDirezioni().toArray());
 	}
 	
 	@Test

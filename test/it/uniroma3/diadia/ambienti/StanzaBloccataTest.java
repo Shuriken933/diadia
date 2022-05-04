@@ -22,7 +22,7 @@ public class StanzaBloccataTest {
 
 	@Test
 	public void test_direzioneBloccata() {
-		assertEquals(null, this.stanzaBloccata.getStanzaAdiacente("nord"));
+		assertEquals(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente("nord"));
 	}
 	
 	@Test
@@ -36,7 +36,7 @@ public class StanzaBloccataTest {
 	public void test_conAttrezzoSbagliato() {
 		Attrezzo attrezzoSbloccante = new Attrezzo("manopola", 1);
 		this.stanzaBloccata.addAttrezzo(attrezzoSbloccante);
-		assertEquals(null, this.stanzaBloccata.getStanzaAdiacente("nord"));
+		assertEquals(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente("nord"));
 	}
 	
 	

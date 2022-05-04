@@ -146,13 +146,13 @@ public class Stanza {
 		//			if (direzione!=null) {
 		//				risultato.append(" " + direzione);
 		//			}
-		risultato.append(this.direzione2stanzaAdiacente.toString());
+		risultato.append(this.direzione2stanzaAdiacente.keySet().toString());
 		risultato.append("\nAttrezzi nella stanza: ");
 		//		for (Attrezzo attrezzo : this.attrezzi) {
 		//			if (attrezzo!=null) {
 		//				risultato.append(attrezzo.toString()+" ");
 		//			}
-		risultato.append(this.nome2attrezzo.toString());
+		risultato.append(this.nome2attrezzo.keySet().toString());
 		return risultato.toString();
 	}
 
