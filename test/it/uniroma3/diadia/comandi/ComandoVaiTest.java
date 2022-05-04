@@ -1,6 +1,10 @@
 package it.uniroma3.diadia.comandi;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +13,8 @@ import it.uniroma3.diadia.DiaDia;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.fixture.Fixture;
 
@@ -19,12 +25,16 @@ public class ComandoVaiTest {
 	private Partita partita; 
 	private Comando comandoVai;
 	private Stanza partenza;
+	private Labirinto labirinto;
 	
 	@Before
 	public void setUp() {
 		this.comandoVai = new ComandoVai();
 		this.comandoVai.setIO(new IOConsole());
-		this.partita = new Partita();
+		this.labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("stanzaIniziale")
+				.getLabirinto();
+		this.partita = new Partita(labirinto);
 		this.partenza = new Stanza(NOME_STANZA_PARTENZA);
 		this.partita.setStanzaCorrente(this.partenza);
 	}
@@ -55,13 +65,21 @@ public class ComandoVaiTest {
 	}
 	
 	@Test
-	public void testPartitaConComandoVai() {
-		String[] righeDaLeggere = {"vai sud", "fine"};
-		IOSimulator io = Fixture.creSimulazionePartitaEGioca(righeDaLeggere);
+	public void testPartitaConComandoVai() throws Exception {
+		List<String> righeDaLeggere = new ArrayList<>();
+		righeDaLeggere.add("vai sud");
+		righeDaLeggere.add("fine");
+		Labirinto labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("LabCampusOne")
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenza("LabCampusOne","Biblioteca","ovest")
+				.getLabirinto();
+		IOSimulator io = Fixture.creaSimulazionePartitaEGioca(labirinto, righeDaLeggere);
+		
 		assertTrue(io.hasNextMessaggio());
 		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.nextMessaggio());
 		assertTrue(io.hasNextMessaggio());
-		assertContains("Aula N10", io.nextMessaggio());
+		assertContains("Biblioteca", io.nextMessaggio());
 		assertTrue(io.hasNextMessaggio());
 		assertEquals(ComandoFine.MESSAGGIO_FINE, io.nextMessaggio());
 	}

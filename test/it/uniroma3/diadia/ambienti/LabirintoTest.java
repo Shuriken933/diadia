@@ -4,34 +4,32 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.Stanza;
-
 public class LabirintoTest {
 	
 	protected Labirinto labirinto;
 	
 	//private Stanza stanzaVincente;
+	private static final String STANZA_INIZIALE = "Stanza iniziale";
+	private static final String STANZA_VINCENTE = "Stanza vincente";
 	
-	//private static final String STANZA_VINCENTE = "Stanza vincente";
-
 	@Before
 	public void setUp() throws Exception {
-		this.labirinto = new Labirinto();
-		//this.stanzaVincente = new Stanza(STANZA_VINCENTE);
+		this.labirinto = new LabirintoBuilder()
+				.addStanzaIniziale(STANZA_INIZIALE)
+				.addStanzaVincente(STANZA_VINCENTE)
+				.getLabirinto();
 	}
 
 
+	@Test
+	public void testGetStanzaIniziale() {
+		assertEquals(STANZA_INIZIALE, this.labirinto.getStanzaIniziale().getNome());
+	}
 	
 	@Test
-	public void testGetStanzaVincente_notNull() {
-		assertNotNull(this.labirinto.getStanzaVincente());
+	public void testGetStanzaVincente() {
+		assertEquals(STANZA_VINCENTE, this.labirinto.getStanzaVincente().getNome());
 	}
 	
-	@Test
-	public void testGetStanzaIniziale_notNull() {
-		assertNotNull(this.labirinto.getStanzaIniziale());
-	}
 	
-
 }
