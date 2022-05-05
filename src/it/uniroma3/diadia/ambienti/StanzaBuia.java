@@ -21,7 +21,7 @@ public class StanzaBuia extends Stanza {
 		if(super.hasAttrezzo(this.attrezzoParticolare))
 			return super.getDescrizione();
 		
-		return "Qui c'è un buio pesto!";
+		return "Qui c'Ã¨ un buio pesto!";
 	}
 
 }

@@ -77,20 +77,11 @@ public class DiaDia {
 
 	public static void main(String[] argc) {
 		IO io = new IOConsole();
-//		Labirinto labirinto1 = new LabirintoBuilder();
-//		labirinto1.addStanzaIniziale("atrio");
-//		labirinto1.addStanzaVincente("biblioteca");
-//		labirinto1.addAdiacenza("atrio", "biblioteca", "nord");
-//		labirinto1.addAdiacenza("biblioteca", "atrio", "sud");
-//		labirinto1.getLabirinto();
-		
 		Labirinto labirinto = new LabirintoBuilder()
 				.addStanzaIniziale("LabCampusOne")
 				.addStanzaVincente("Biblioteca")
 				.addAdiacenza("LabCampusOne","Biblioteca","ovest")
 				.getLabirinto();
-
-				
 		DiaDia gioco = new DiaDia(io, labirinto);
 		gioco.gioca();
 	}

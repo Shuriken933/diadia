@@ -27,7 +27,7 @@ public class Fixture {
 		return attrezzo;
 	}
 
-	public static IOSimulatorConList creSimulazionePartitaEGiocaConList(List<String> righeDaLeggere) {
+	public static IOSimulatorConList creaSimulazionePartitaEGiocaConList(List<String> righeDaLeggere) {
 		IOSimulatorConList io = new IOSimulatorConList(righeDaLeggere);
 		new DiaDia(io, labirinto).gioca();
 		return io;
