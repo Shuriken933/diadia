@@ -24,12 +24,8 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Borsa{
 	
-	//private List <Attrezzo> attrezzi;
 	private Map <String, Attrezzo> nome2attrezzo;
-
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
-	//private Attrezzo[] attrezzi;
-	//private int numeroAttrezzi;
 	private int pesoMax;
 	private int pesoAttuale;
 
@@ -58,14 +54,6 @@ public class Borsa{
 	 * @return false se non viene aggiunto un attrezzo
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		/*if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax()) {
-			return false;
-		}
-		if (this.attrezzi.size()==10) {
-			return false;
-		}
-		this.attrezzi.add(attrezzo);
-		return true;*/
 		if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax()) {
 			return false;
 		}
@@ -90,19 +78,6 @@ public class Borsa{
 	 * @return null se l'attrezzo non è presente nella borsa
 	 */
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
-		/*Attrezzo a = null;
-		for (int i= 0; i<this.numeroAttrezzi; i++) {
-			if (this.attrezzi[i] != null && this.attrezzi[i].getNome().equals(nomeAttrezzo)) {
-				a = attrezzi[i];
-			}
-		}*/
-		
-		/*for(Attrezzo a : this.attrezzi) {
-			if(a.getNome().equals(nomeAttrezzo)) {
-				return a;
-			}
-		}
-		return null;*/
 		return this.nome2attrezzo.get(nomeAttrezzo);
 	}
 
@@ -110,11 +85,6 @@ public class Borsa{
 	 * @return peso peso totale sostenuto dalla borsa
 	 */
 	public int getPeso() {
-		//int peso = 0;
-		/*for (Attrezzo a : this.attrezzi) {
-			peso += a.getPeso();
-		}
-		return peso;*/
 		return pesoAttuale;
 	}
 
@@ -133,16 +103,6 @@ public class Borsa{
 	 * @return null se l'attrezzo non è presente nella borsa
 	 */
 	public Attrezzo removeAttrezzo(String nomeAttrezzo) {
-		/*Attrezzo a = null;
-		Iterator<Attrezzo> iter = this.attrezzi.iterator();
-		while(iter.hasNext()) {
-			a=iter.next();
-			if (a.getNome().equals(nomeAttrezzo)) {
-				iter.remove();
-				return a;
-			}
-		}
-		return null;*/
 		if(this.nome2attrezzo.containsKey(nomeAttrezzo))
 			this.pesoAttuale = this.pesoAttuale - this.nome2attrezzo.get(nomeAttrezzo).getPeso();
 		return this.nome2attrezzo.remove(nomeAttrezzo);
@@ -193,10 +153,6 @@ public class Borsa{
 
 		if (!this.isEmpty()) {
 			s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg): ");
-			
-			/*for(Attrezzo attrezzo : this.attrezzi) {
-				s.append(attrezzo.toString()+ " ");
-			}*/
 			s.append(this.nome2attrezzo.values().toString()+" ");
 		}
 		else {
@@ -204,8 +160,4 @@ public class Borsa{
 		}
 		return s.toString();
 	}
-	
-
-
-	
 }

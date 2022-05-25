@@ -12,7 +12,6 @@ public class IOSimulatorConList implements IO{
 	public IOSimulatorConList(List<String> righeDaLeggere) {
 		this.righeDaLeggere = righeDaLeggere;
 		this.messaggiProdotti = new LinkedList<String>();
-
 	}
 
 	@Override
