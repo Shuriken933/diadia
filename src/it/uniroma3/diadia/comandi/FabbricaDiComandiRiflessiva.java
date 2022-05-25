@@ -6,13 +6,14 @@ import it.uniroma3.diadia.IO;
 
 public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 
-	private IO io;
+	//private IO io;
 
+	@SuppressWarnings("deprecation")
 	public AbstractComando costruisciComando(String istruzione, IO io) {
 
-		Scanner scannerDiParole = new Scanner(istruzione); // es. ‘vai sud’
-		String nomeComando = null; // es. ‘vai’
-		String parametro = null; // es. ‘sud’
+		Scanner scannerDiParole = new Scanner(istruzione); // es. vai sud
+		String nomeComando = null; // es. vai
+		String parametro = null; // es. sud
 		AbstractComando comando = null;
 
 		if (scannerDiParole.hasNext())
@@ -27,13 +28,13 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 			nomeClasse += nomeComando.substring(1);
 
 			comando = (AbstractComando)Class.forName(nomeClasse).newInstance();
-			comando.setParametro(parametro);
-			comando.setIO(io);
-
+			
 		} catch (Exception e) {
 			comando = new ComandoNonValido();
-			this.io.mostraMessaggio("Comando inesistente");
 		}
+		
+		comando.setIO(io);
+		comando.setParametro(parametro);
 		return comando;
 	}
 }

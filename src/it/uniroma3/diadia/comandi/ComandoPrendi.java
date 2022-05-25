@@ -6,7 +6,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class ComandoPrendi extends AbstractComando {
 
 	private static final String NOME = "prendi";
-	private String nomeAttrezzo;
+	//private String nomeAttrezzo;
 	
 	public ComandoPrendi() {
 		super.setNome(NOME);
@@ -15,17 +15,17 @@ public class ComandoPrendi extends AbstractComando {
 	@Override
 	public void esegui(Partita partita) {
 
-		if(!partita.getStanzaCorrente().hasAttrezzo(nomeAttrezzo)) {
-			super.getIo().mostraMessaggio("Attrezzo "+nomeAttrezzo+" non presente!");
+		if(!partita.getStanzaCorrente().hasAttrezzo(super.getParametro())) {
+			super.getIo().mostraMessaggio("Attrezzo "+super.getParametro()+" non presente!");
 			return;
 		}
-		Attrezzo attrezzo = partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo);
+		Attrezzo attrezzo = partita.getStanzaCorrente().getAttrezzo(super.getParametro());
 		if(partita.getGiocatore().getBorsa().addAttrezzo(attrezzo)) {
 			partita.getStanzaCorrente().removeAttrezzo(attrezzo);
-			super.getIo().mostraMessaggio("Attrezzo "+nomeAttrezzo+" preso!");
+			super.getIo().mostraMessaggio("Attrezzo "+super.getParametro()+" preso!");
 		}
 		else {
-			super.getIo().mostraMessaggio("Attrezzo "+nomeAttrezzo+" NON preso!");
+			super.getIo().mostraMessaggio("Attrezzo "+super.getParametro()+" NON preso!");
 		}		
 	}
 

@@ -18,17 +18,15 @@ import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
  * @version 0.1
  */
 
-public class Stanza {
+public class Stanza implements Comparable<Stanza>{
 
 	static final private int NUMERO_MASSIMO_DIREZIONI = 4;
 	final public static int NUMERO_MASSIMO_ATTREZZI = 10;
 
 	private String nome;
 	private Map<String, Attrezzo> nome2attrezzo;
-	protected Map<String, Stanza> direzione2stanzaAdiacente;
+	protected Map<Direzione, Stanza> direzione2stanzaAdiacente;
 	private AbstractPersonaggio personaggio;
-	//	protected int numeroStanzeAdiacenti;
-	//	protected String[] direzioni;
 
 	/**
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
@@ -46,7 +44,7 @@ public class Stanza {
 	 * @param direzione direzione in cui sara' posta la stanza adiacente.
 	 * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
 	 */
-	public void impostaStanzaAdiacente(String direzione, Stanza stanzaAdiacente) {
+	public void impostaStanzaAdiacente(Direzione direzione, Stanza stanzaAdiacente) {
 		if(this.direzione2stanzaAdiacente.size() < NUMERO_MASSIMO_DIREZIONI)
 			this.direzione2stanzaAdiacente.put(direzione,stanzaAdiacente);
 	}
@@ -56,7 +54,7 @@ public class Stanza {
 	 * Restituisce la stanza adiacente nella direzione specificata
 	 * @param direzione
 	 */
-	public Stanza getStanzaAdiacente(String direzione) {
+	public Stanza getStanzaAdiacente(Direzione direzione) {
 		return this.direzione2stanzaAdiacente.get(direzione);
 	}
 
@@ -149,7 +147,7 @@ public class Stanza {
 	 * Restituisce le direzioni disponibili della stanza
 	 * @return direzioni array di stringhe
 	 */
-	public Set<String> getDirezioni() {
+	public Set<Direzione> getDirezioni() {
 		return this.direzione2stanzaAdiacente.keySet();
 	}
 
@@ -159,6 +157,12 @@ public class Stanza {
 
 	public void setPersonaggio(AbstractPersonaggio personaggio) {
 		this.personaggio = personaggio;
+	}
+
+	@Override
+	public int compareTo(Stanza that) {
+		//int comparatoreAttrezzi = this.getAttrezzi().size()
+		return this.getAttrezzi().size() - that.getAttrezzi().size();
 	}
 
 }

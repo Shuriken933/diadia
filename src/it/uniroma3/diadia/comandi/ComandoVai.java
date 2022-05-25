@@ -1,12 +1,13 @@
 package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 public class ComandoVai extends AbstractComando {
 
 	private static final String NOME = "vai";
-	private String direzione;
+	//private String direzione;
 	
 	public ComandoVai() {
 		super.setNome(NOME);
@@ -15,10 +16,20 @@ public class ComandoVai extends AbstractComando {
 	@Override
 	public void esegui(Partita partita) {
 
-		if(direzione==null)
+		if(super.getParametro()==null)
 			super.getIo().mostraMessaggio("Dove vuoi andare ?");
+		
 		Stanza prossimaStanza = null;
+		Direzione direzione;
+		try {
+			direzione = Direzione.valueOf(super.getParametro().toUpperCase());
+		}catch (IllegalArgumentException e){
+			super.getIo().mostraMessaggio("Direzione inesistente");
+			return;
+		}
+		
 		prossimaStanza = partita.getStanzaCorrente().getStanzaAdiacente(direzione);
+		
 		if (prossimaStanza == null)
 			super.getIo().mostraMessaggio("Direzione inesistente");
 		else {
@@ -29,24 +40,7 @@ public class ComandoVai extends AbstractComando {
 		super.getIo().mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
 	}
 	
-//	@Override
-//	public void setParametro(String parametro) {
-//		this.direzione = parametro;
-//
-//	}
-//
-//	@Override
-//	public void setIO(IO console) {
-//		this.io = console;
-//	}
-//	
-//	@Override
-//	public String getNome() {
-//		return "vai";
-//	}
-//
-//	@Override
-//	public String getParametro() {
-//		return this.direzione;
-//	}
+
+	
+	
 }

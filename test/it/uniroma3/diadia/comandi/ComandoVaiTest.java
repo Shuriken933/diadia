@@ -23,7 +23,7 @@ public class ComandoVaiTest {
 	private static final String NOME_STANZA_PARTENZA = "partenza";
 	private static final String NORD = "nord";
 	private Partita partita; 
-	private Comando comandoVai;
+	private AbstractComando comandoVai;
 	private Stanza partenza;
 	private Labirinto labirinto;
 	

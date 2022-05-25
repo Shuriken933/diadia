@@ -29,22 +29,5 @@ public class ComandoInteragisci extends AbstractComando {
 		return this.messaggio;
 	}
 	
-//	@Override
-//	public void setParametro(String parametro) {
-//	}
-//	
-//	@Override
-//	public void setIO(IO io) {
-//	}
-//	
-//	@Override
-//	public String getNome() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//	@Override
-//	public String getParametro() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+
 }

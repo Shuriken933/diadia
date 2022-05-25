@@ -11,7 +11,7 @@ public class FabbricaDiComandiFisarmonicaTest {
 
 	private IO io;
 	private FabbricaDiComandiFisarmonica fabbricaDiComandi;
-	private Comando comando;
+	private AbstractComando comando;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -37,7 +37,7 @@ public class FabbricaDiComandiFisarmonicaTest {
 	
 	@Test
 	public void test_ComandoNonValido() {
-		assertEquals("comando non valido", this.fabbricaDiComandi.costruisciComando("un comando a caso", io).getNome());
+		assertEquals("non_valido", this.fabbricaDiComandi.costruisciComando("un comando a caso", io).getNome());
 	}
 	
 	/*

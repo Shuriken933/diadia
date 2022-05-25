@@ -31,4 +31,10 @@ public class Mago extends AbstractPersonaggio {
 		}
 		return msg;
 	}
+
+	@Override
+	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
