@@ -19,7 +19,7 @@ public class ComandoPosaTest {
 	private static final String ATTREZZO = "attrezzoDiTest";
 	private IO io;
 	
-	private Comando comandoDaEseguire;
+	private AbstractComando comandoDaEseguire;
 	private Partita partita;
 	private String istruzione;
 	private Attrezzo attrezzoDaPosare;
