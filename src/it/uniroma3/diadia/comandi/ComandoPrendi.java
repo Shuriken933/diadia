@@ -6,7 +6,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class ComandoPrendi extends AbstractComando {
 
 	private static final String NOME = "prendi";
-	//private String nomeAttrezzo;
+
 	
 	public ComandoPrendi() {
 		super.setNome(NOME);

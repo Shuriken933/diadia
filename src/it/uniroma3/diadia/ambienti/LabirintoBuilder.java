@@ -32,10 +32,10 @@ public class LabirintoBuilder {
 		return this;
 	}
 	
-	public LabirintoBuilder addAdiacenza(String partenza, String adiacente, Direzione direzione) {
+	public LabirintoBuilder addAdiacenza(String partenza, String adiacente, String direzione) {
 		Stanza stanzaPartenza = this.nome2stanza.get(partenza);
 		Stanza stanzaAdiacente = this.nome2stanza.get(adiacente);
-		stanzaPartenza.impostaStanzaAdiacente(direzione, stanzaAdiacente);
+		stanzaPartenza.impostaStanzaAdiacente(Direzione.valueOf(direzione.toUpperCase()), stanzaAdiacente);
 		return this;
 	}
 	

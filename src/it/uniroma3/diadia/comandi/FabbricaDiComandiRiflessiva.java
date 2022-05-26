@@ -31,6 +31,7 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 			
 		} catch (Exception e) {
 			comando = new ComandoNonValido();
+
 		}
 		
 		comando.setIO(io);

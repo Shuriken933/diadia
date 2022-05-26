@@ -18,7 +18,7 @@ import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
  * @version 0.1
  */
 
-public class Stanza implements Comparable<Stanza>{
+public class Stanza /*implements Comparable<Stanza>*/{
 
 	static final private int NUMERO_MASSIMO_DIREZIONI = 4;
 	final public static int NUMERO_MASSIMO_ATTREZZI = 10;
@@ -159,10 +159,10 @@ public class Stanza implements Comparable<Stanza>{
 		this.personaggio = personaggio;
 	}
 
-	@Override
-	public int compareTo(Stanza that) {
-		//int comparatoreAttrezzi = this.getAttrezzi().size()
-		return this.getAttrezzi().size() - that.getAttrezzi().size();
-	}
+//	@Override
+//	public int compareTo(Stanza that) {
+//		//int comparatoreAttrezzi = this.getAttrezzi().size()
+//		return this.getAttrezzi().size() - that.getAttrezzi().size();
+//	}
 
 }

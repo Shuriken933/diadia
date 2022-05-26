@@ -10,6 +10,8 @@ public class Mago extends AbstractPersonaggio {
 			"per il tuo borsone!";
 	
 	private static final String MESSAGGIO_SCUSE = "Mi spiace, ma non ho piu' nulla...";
+
+	private static final String MESSAGGIO_REGALO = "Ho fatto una magia, ho dimezzato il peso di ";
 	
 	private Attrezzo attrezzo;
 	
@@ -33,8 +35,11 @@ public class Mago extends AbstractPersonaggio {
 	}
 
 	@Override
-	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
-		// TODO Auto-generated method stub
-		return null;
+	public String riceviRegalo(Attrezzo regalo, Partita partita) {
+		
+		int nuovoPeso = regalo.getPeso() /2;
+		regalo.setPeso(nuovoPeso);
+		partita.getStanzaCorrente().addAttrezzo(regalo);
+		return MESSAGGIO_REGALO + regalo.getNome();
 	}
 }
