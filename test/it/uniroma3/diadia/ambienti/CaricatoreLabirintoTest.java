@@ -36,9 +36,20 @@ public class CaricatoreLabirintoTest {
 	public void setUp() throws Exception {
 	}
 
+//	@Test
+//	public void testCaricamento() throws FileNotFoundException, FormatoFileNonValidoException {
+//		CaricatoreLabirinto caricatore = new CaricatoreLabirinto(LABIRINTO_BILOCALE);
+//		caricatore.carica();
+//		Labirinto labiritno = caricatore.getLabirinto();
+//		assertEquals("N10", labiritno.getStanzaIniziale().getNome());
+//		assertEquals("Biblioteca", labiritno.getStanzaVincente().getNome());
+//		assertEquals("Osso", labiritno.getStanzaIniziale().getAttrezzo("Osso").getNome());
+//		assertEquals(5, labiritno.getStanzaIniziale().getAttrezzo("Osso").getPeso());
+//	}
+	
 	@Test
-	public void testCaricamento() throws FileNotFoundException, FormatoFileNonValidoException {
-		CaricatoreLabirinto caricatore = new CaricatoreLabirinto(LABIRINTO_BILOCALE);
+	public void testCarica() throws FileNotFoundException, FormatoFileNonValidoException {
+		CaricatoreLabirinto caricatore = new CaricatoreLabirinto(new StringReader(LABIRINTO_BILOCALE));
 		caricatore.carica();
 		Labirinto labiritno = caricatore.getLabirinto();
 		assertEquals("N10", labiritno.getStanzaIniziale().getNome());
