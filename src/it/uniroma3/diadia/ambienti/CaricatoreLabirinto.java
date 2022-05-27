@@ -15,7 +15,13 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class CaricatoreLabirinto {
 
 	/* prefisso di una singola riga di testo contenente tutti i nomi delle stanze */
-	private static final String STANZE_MARKER = "Stanze:";             
+	private static final String STANZE_MARKER = "Stanze:";  
+	
+	/* prefisso di una singola riga di testo contenente tutti i nomi delle stanze magiche*/
+	private static final String MAGICHE_MARKER = "Magiche:";
+	
+	/* prefisso di una singola riga di testo contenente tutti i nomi delle stanze bloccate*/
+	private static final String BLOCCATE_MARKER = "Bloccate:";
 
 	/* prefisso di una singola riga contenente il nome della stanza iniziale */
 	private static final String STANZA_INIZIALE_MARKER = "Inizio:";    
@@ -52,11 +58,14 @@ public class CaricatoreLabirinto {
 	public CaricatoreLabirinto(String nomeFile) throws FileNotFoundException {
 		this.nome2stanza = new HashMap<String,Stanza>();
 		this.reader = new LineNumberReader(new FileReader(nomeFile));
+		this.builder = new LabirintoBuilder();
 	}
+
 
 	public void carica() throws FormatoFileNonValidoException {
 		try {
 			this.leggiECreaStanze();
+			this.leggiStanzeMagiche();
 			this.leggiInizialeEvincente();
 			this.leggiECollocaAttrezzi();
 			this.leggiEImpostaUscite();
@@ -86,8 +95,28 @@ public class CaricatoreLabirinto {
 		for(String nomeStanza : separaStringheAlleVirgole(nomiStanze)) {
 			Stanza stanza = new Stanza(nomeStanza);
 			this.nome2stanza.put(nomeStanza, stanza);
+			this.builder.addStanza(nomeStanza);
 		}
 	}
+	
+	private void leggiStanzeMagiche() throws FormatoFileNonValidoException  {
+		String nomiStanze = this.leggiRigaCheCominciaPer(MAGICHE_MARKER);
+		for(String nomeStanza : separaStringheAlleVirgole(nomiStanze)) {
+			Stanza stanza = new StanzaMagica(nomeStanza);
+			this.nome2stanza.put(nomeStanza, stanza);
+			this.builder.addStanzaMagica(nomeStanza);
+		}
+		
+	}
+	
+	/*private void leggiStanzeBloccate() throws FormatoFileNonValidoException  {
+		String nomiStanze = this.leggiRigaCheCominciaPer(BLOCCATE_MARKER);
+		for(String nomeStanza : separaStringheAlleVirgole(nomiStanze)) {
+			Stanza stanza = new StanzaBloccata(nomeStanza);
+			this.nome2stanza.put(nomeStanza, stanza);
+			this.builder.addStanzaBloccata(nomeStanza);
+		}
+	}*/
 
 	private List<String> separaStringheAlleVirgole(String string) {
 		List<String> result = new LinkedList<>();
@@ -107,7 +136,9 @@ public class CaricatoreLabirinto {
 		String nomeStanzaVincente = this.leggiRigaCheCominciaPer(STANZA_VINCENTE_MARKER);
 		check(this.isStanzaValida(nomeStanzaVincente), nomeStanzaVincente + " non definita");
 		this.stanzaIniziale = this.nome2stanza.get(nomeStanzaIniziale);
+		this.builder.addStanzaIniziale(nomeStanzaIniziale);
 		this.stanzaVincente = this.nome2stanza.get(nomeStanzaVincente);
+		this.builder.addStanzaVincente(nomeStanzaVincente);
 	}
 
 	private void leggiECollocaAttrezzi() throws FormatoFileNonValidoException {
@@ -136,6 +167,7 @@ public class CaricatoreLabirinto {
 			Attrezzo attrezzo = new Attrezzo(nomeAttrezzo, peso);
 			check(isStanzaValida(nomeStanza),"Attrezzo "+ nomeAttrezzo+" non collocabile: stanza " +nomeStanza+" inesistente");
 			this.nome2stanza.get(nomeStanza).addAttrezzo(attrezzo);
+			this.builder.addAttrezzo(nomeAttrezzo, peso);
 		}
 		catch (NumberFormatException e) {
 			check(false, "Peso attrezzo "+nomeAttrezzo+" non valido");
@@ -168,31 +200,33 @@ public class CaricatoreLabirinto {
 		return "Terminazione precoce del file prima di leggere "+msg;
 	}
 
-//	private void impostaUscita(String stanzaDa, String dir, String nomeA) throws FormatoFileNonValidoException {
-//		check(isStanzaValida(stanzaDa),"Stanza di partenza sconosciuta "+dir);
-//		check(isStanzaValida(nomeA),"Stanza di destinazione sconosciuta "+ dir);
-//		Stanza partenzaDa = this.nome2stanza.get(stanzaDa);
-//		Stanza arrivoA = this.nome2stanza.get(nomeA);
-//		switch(dir) {
-//			case "nord":
-//				partenzaDa.impostaStanzaAdiacente(Direzione.NORD, arrivoA);
-//				break;
-//			case "sud":
-//				partenzaDa.impostaStanzaAdiacente(Direzione.SUD, arrivoA);
-//				break;
-//			case "ovest":
-//				partenzaDa.impostaStanzaAdiacente(Direzione.OVEST, arrivoA);
-//				break;
-//			case "est":
-//				partenzaDa.impostaStanzaAdiacente(Direzione.EST, arrivoA);
-//				break;
-//		}
-//		//partenzaDa.impostaStanzaAdiacente(dir, arrivoA);
-//	}
-	
-	private void impostaUscita(String nomeUscita, String nomeStanzaPartenza, String nomeStanzaDestinazione) {
-		this.builder.addAdiacenza(nomeStanzaPartenza, nomeStanzaDestinazione, nomeUscita);
+	private void impostaUscita(String stanzaDa, String dir, String nomeA) throws FormatoFileNonValidoException {
+		check(isStanzaValida(stanzaDa),"Stanza di partenza sconosciuta "+dir);
+		check(isStanzaValida(nomeA),"Stanza di destinazione sconosciuta "+ dir);
+		Stanza partenzaDa = this.nome2stanza.get(stanzaDa);
+		Stanza arrivoA = this.nome2stanza.get(nomeA);
+		/*switch(dir) {
+			case "nord":
+				partenzaDa.impostaStanzaAdiacente(Direzione.NORD, arrivoA);
+				break;
+			case "sud":
+				partenzaDa.impostaStanzaAdiacente(Direzione.SUD, arrivoA);
+				break;
+			case "ovest":
+				partenzaDa.impostaStanzaAdiacente(Direzione.OVEST, arrivoA);
+				break;
+			case "est":
+				partenzaDa.impostaStanzaAdiacente(Direzione.EST, arrivoA);
+				break;
+		}*/
+		partenzaDa.impostaStanzaAdiacente(Direzione.valueOf(dir), arrivoA);
+		this.builder.addAdiacenza(partenzaDa.getNome(), arrivoA.getNome(), dir);
+		//partenzaDa.impostaStanzaAdiacente(dir, arrivoA);
 	}
+	
+//	private void impostaUscita(String nomeUscita, String nomeStanzaPartenza, String nomeStanzaDestinazione) {
+//		this.builder.addAdiacenza(nomeStanzaPartenza, nomeStanzaDestinazione, nomeUscita);
+//	}
 
 
 	final private void check(boolean condizioneCheDeveEsseraVera, String messaggioErrore) throws FormatoFileNonValidoException {
@@ -206,5 +240,11 @@ public class CaricatoreLabirinto {
 
 	public Stanza getStanzaVincente() {
 		return this.stanzaVincente;
+	}
+	
+	
+	
+	public Labirinto getLabirinto() {
+		return this.builder.getLabirinto();
 	}
 }

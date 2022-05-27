@@ -40,7 +40,7 @@ public class LabirintoBuilder {
 	}
 	
 	public LabirintoBuilder addAttrezzo(String nome, int peso) {
-		Attrezzo a= new Attrezzo(nome, peso);
+		Attrezzo a = new Attrezzo(nome, peso);
 		this.ultimaAggiunta.addAttrezzo(a);
 		return this;
 	}
