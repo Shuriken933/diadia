@@ -25,6 +25,8 @@ public class StregaTest {
 				.addStanza("N10")
 				.addAttrezzo("torcia", 3)
 				.addAdiacenza("LabCampusOne", "N10", "sud")
+				.addStanza("Stanza vuota")
+				.addAdiacenza("LabCampusOne", "Stanza vuota", "ovest")
 				.getLabirinto();
 		this.partita = new Partita(labirinto);
 		this.strega = new Strega("strega", "presentazione");
@@ -33,7 +35,14 @@ public class StregaTest {
 	@Test
 	public void testAgisci_NoSaluto() {
 		this.strega.agisci(this.partita);
-		assertEquals("N10", this.partita.getStanzaCorrente().getNome());
+		assertEquals("Stanza vuota", this.partita.getStanzaCorrente().getNome());
+	}
+	
+	@Test
+	public void testAgisci_Saluto() {
+		this.strega.saluta();
+		this.strega.agisci(this.partita);
+		assertEquals("Biblioteca", this.partita.getStanzaCorrente().getNome());
 	}
 
 }

@@ -6,7 +6,7 @@ public class ComparatoreStanzePerNumeroAttrezzi implements Comparator<Stanza>{
 
 	@Override
 	public int compare(Stanza o1, Stanza o2) {
-		return o1.getAttrezzi().size() - o2.getAttrezzi().size();
+		return o2.getAttrezzi().size() - o1.getAttrezzi().size();
 	}
 
 }

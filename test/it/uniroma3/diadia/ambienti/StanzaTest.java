@@ -31,38 +31,26 @@ public class StanzaTest {
 	@Test
 	public void testImpostaStanzaAdiacente_SINGOLA() {
 		//this.stanza1.impostaStanzaAdiacente(NORD, stanza2);
-		Stanza adiacente = creaStanzaEImpostaAdiacente(this.stanza, STANZA, NORD);
-		assertEquals(adiacente, this.stanza.getStanzaAdiacente(NORD));
+		Stanza adiacente = creaStanzaEImpostaAdiacente(this.stanza, STANZA, Direzione.NORD);
+		assertEquals(adiacente, this.stanza.getStanzaAdiacente(Direzione.NORD));
 	}
 	
 	@Test
 	public void testCambiaStanzaAdiacente() {
-		creaStanzaEImpostaAdiacente(this.stanza, STANZA, NORD);
-		Stanza nuova = creaStanzaEImpostaAdiacente(this.stanza, "Nuova Adiacente", NORD);
-		assertEquals(nuova, this.stanza.getStanzaAdiacente(NORD));
-	}
-	
-	@Test
-	public void testImpostaMassimo4Stanze() {
-		Stanza adiacente = new Stanza(STANZA_ADIACENTE);
-		String[] direzioni = new String[] {"nord", "sud", "est", "ovest"};
-		for (String direzione: direzioni) {
-			this.stanza.impostaStanzaAdiacente(direzione, adiacente);
-		}
-		String direzioneNuova = "sud-ovest";
-		creaStanzaEImpostaAdiacente(this.stanza, "Da non inserire", direzioneNuova);
-		assertNotContains(this.stanza.getDirezioni(), direzioneNuova);
+		creaStanzaEImpostaAdiacente(this.stanza, STANZA, Direzione.NORD);
+		Stanza nuova = creaStanzaEImpostaAdiacente(this.stanza, "Nuova Adiacente", Direzione.NORD);
+		assertEquals(nuova, this.stanza.getStanzaAdiacente(Direzione.NORD));
 	}
 	
 	@Test
 	public void testGetStanzaAdiacente_NonEsistente() {
-		assertNull(this.stanza.getStanzaAdiacente(NORD));
+		assertNull(this.stanza.getStanzaAdiacente(Direzione.NORD));
 	}
 	
 	@Test
 	public void testGetStanzaAdiacente_Esistente() {
-		Stanza adiacente = creaStanzaEImpostaAdiacente(this.stanza, STANZA_ADIACENTE, NORD);
-		assertEquals(adiacente, this.stanza.getStanzaAdiacente(NORD));
+		Stanza adiacente = creaStanzaEImpostaAdiacente(this.stanza, STANZA_ADIACENTE, Direzione.NORD);
+		assertEquals(adiacente, this.stanza.getStanzaAdiacente(Direzione.NORD));
 	}
 	
 	
@@ -78,8 +66,8 @@ public class StanzaTest {
 	
 	@Test
 	public void  testGetStanzaAdiacente_direzioneNonValida() {
-		creaStanzaEImpostaAdiacente(this.stanza, STANZA_ADIACENTE, NORD);
-		assertNull(this.stanza.getStanzaAdiacente("nonValida"));
+		creaStanzaEImpostaAdiacente(this.stanza, STANZA_ADIACENTE, Direzione.NORD);
+		assertNull(this.stanza.getStanzaAdiacente(Direzione.EST));
 	}
 	
 	@Test
@@ -89,9 +77,9 @@ public class StanzaTest {
 	
 	@Test
 	public void testGetDirezioni_singleton() {
-		creaStanzaEImpostaAdiacente(this.stanza, STANZA_ADIACENTE, NORD);
-		String[] direzioni = new String[1];
-		direzioni[0] = NORD;
+		creaStanzaEImpostaAdiacente(this.stanza, STANZA_ADIACENTE, Direzione.NORD);
+		Direzione[] direzioni = new Direzione[1];
+		direzioni[0] = Direzione.NORD;
 		assertArrayEquals(direzioni, this.stanza.getDirezioni().toArray());
 	}
 	
@@ -128,17 +116,17 @@ public class StanzaTest {
 
 	/*metodo di appoggio*/
 	
-	private void assertNotContains(Set<String> set, String direzioneNuova) {
+	private void assertNotContains(Set<String> set, Direzione direzioneNuova) {
 		boolean contiene = false;
 		for(String direzione: set) {
-			if (direzione != null && direzione.equals(direzioneNuova)) {
+			if (direzione != null && direzione.equals(direzioneNuova.name())) {
 				contiene = true;
 			}
 		}
 		assertFalse(contiene);
 	}
 	
-	private Stanza creaStanzaEImpostaAdiacente(Stanza stanzaDiPartenza, String nomeStanzaAdiacente, String direzione) {
+	private Stanza creaStanzaEImpostaAdiacente(Stanza stanzaDiPartenza, String nomeStanzaAdiacente, Direzione direzione) {
 		Stanza stanzaAdiacente = new Stanza(nomeStanzaAdiacente);
 		stanzaDiPartenza.impostaStanzaAdiacente(direzione, stanzaAdiacente);
 		return stanzaAdiacente;

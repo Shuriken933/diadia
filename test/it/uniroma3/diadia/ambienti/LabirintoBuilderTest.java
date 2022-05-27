@@ -25,7 +25,7 @@ public class LabirintoBuilderTest {
 
 	@Test
 	public void testAddAdiacenza() {
-		assertEquals(STANZA_VINCENTE, this.labirinto.getStanzaIniziale().getStanzaAdiacente(DIREZIONE).getNome());
+		assertEquals(STANZA_VINCENTE, this.labirinto.getStanzaIniziale().getStanzaAdiacente(Direzione.OVEST).getNome());
 	}
 	
 	@Test
