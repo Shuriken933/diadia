@@ -1,0 +1,5 @@
+Stanze: biblioteca, N10, N11, laboratorio, atrio
+Inizio: atrio
+Vincente: biblioteca
+Attrezzi: martello-7-biblioteca, osso-4-atrio, forbici-2-atrio
+Uscite: atrio-nord-biblioteca, atrio-est-N11, atrio-sud-N10, atrio-ovest-laboratorio, N11-est-laboratorio, N11-ovest-atrio, N10-nord-atrio, N10-est-N11, N10-ovest-laboratorio, laboratorio-est-atrio, laboratorio-ovest-N11, biblioteca-sud-atrio

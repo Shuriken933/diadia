@@ -1,61 +1,57 @@
 package it.uniroma3.diadia.ambienti;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.io.FileNotFoundException;
 import java.io.StringReader;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class CaricatoreLabirintoTest {
-	
-	private static final String LABIRINTO_MONOLOCALE
-	= "Stanze:\n"
-	+ "N10\n"
-	+ "Estremi:\n"
-	+ "N10\n"
-	+ "Attrezzi:\n"
-	+ "Osso 5 N10\n"
-	+ "Uscite:\n";
-	
-	private static final String LABIRINTO_BILOCALE
-	= "Stanze:\n"
-	+ "N10\n"
-	+ "Biblioteca:\n"
-	+ "Estremi:\n"
-	+ "N10\n"
-	+ "Biblioteca\n"
-	+ "Attrezzi:\n"
-	+ "Osso 5 N10\n"
-	+ "Uscite:\n"
-	+ "N10 nord Biblioteca\n"
-	+ "Biblioteca sud N10";
+
+
+
+	private static final StringReader STRING_MONOLOCALE = new StringReader(
+			"Stanze: biblioteca\n" +
+			"Bloccate:\n" +
+			"Buie:\n" +
+			"Magiche:\n" +
+			"Inizio: biblioteca\n" +
+			"Vincente: biblioteca\n" +
+			"Attrezzi: martello 10 biblioteca\n" +
+			"Uscite: \n" +
+			"UltimoLivello: false");
+
+	private static final StringReader STRING_BILOCALE = new StringReader(
+			"Stanze: biblioteca, N10\n" +
+			"Bloccate:\n" +
+			"Buie:\n" +
+			"Magiche:\n" +
+			"Inizio: N10\n" +
+			"Vincente: biblioteca\n" +
+			"Attrezzi: martello 10 biblioteca, pinza 2 N10\n" +
+			"Uscite: biblioteca sud N10\n" +
+			"UltimoLivello: false");
 
 	@Before
 	public void setUp() throws Exception {
 	}
 
-//	@Test
-//	public void testCaricamento() throws FileNotFoundException, FormatoFileNonValidoException {
-//		CaricatoreLabirinto caricatore = new CaricatoreLabirinto(LABIRINTO_BILOCALE);
-//		caricatore.carica();
-//		Labirinto labiritno = caricatore.getLabirinto();
-//		assertEquals("N10", labiritno.getStanzaIniziale().getNome());
-//		assertEquals("Biblioteca", labiritno.getStanzaVincente().getNome());
-//		assertEquals("Osso", labiritno.getStanzaIniziale().getAttrezzo("Osso").getNome());
-//		assertEquals(5, labiritno.getStanzaIniziale().getAttrezzo("Osso").getPeso());
-//	}
-	
+
 	@Test
-	public void testCarica() throws FileNotFoundException, FormatoFileNonValidoException {
-		CaricatoreLabirinto caricatore = new CaricatoreLabirinto(new StringReader(LABIRINTO_BILOCALE));
-		caricatore.carica();
-		Labirinto labiritno = caricatore.getLabirinto();
-		assertEquals("N10", labiritno.getStanzaIniziale().getNome());
-		assertEquals("Biblioteca", labiritno.getStanzaVincente().getNome());
-		assertEquals("Osso", labiritno.getStanzaIniziale().getAttrezzo("Osso").getNome());
-		assertEquals(5, labiritno.getStanzaIniziale().getAttrezzo("Osso").getPeso());
+	public void testCarica_Monolocale() throws Exception {
+		CaricatoreLabirinto monolocale = new CaricatoreLabirinto(STRING_MONOLOCALE);
+		monolocale.carica();
+		assertEquals("biblioteca", monolocale.getStanzaIniziale().getNome());
+	}
+
+	@Test
+	public void testCarica_Bilocale() throws Exception {
+
+		CaricatoreLabirinto bilocale = new CaricatoreLabirinto(STRING_BILOCALE);
+		bilocale.carica();
+		assertEquals("N10", bilocale.getStanzaIniziale().getNome());
+		assertEquals("biblioteca", bilocale.getStanzaIniziale().getStanzaAdiacente(Direzione.NORD).getNome());
 	}
 
 }
