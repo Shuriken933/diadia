@@ -5,7 +5,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="it/uniroma3/diadia/Comando.java|it/uniroma3/diadia/giocatore/ComparatorePerNome.java" kind="src" path="src"/>
+	<classpathentry excluding="it/uniroma3/diadia/Comando.java|it/uniroma3/diadia/giocatore/ComparatorePerNome.java|it/uniroma3/diadia/ambienti/LabirintoBuilder.java" kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>

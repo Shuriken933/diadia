@@ -12,7 +12,6 @@ import it.uniroma3.diadia.DiaDia;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.IOSimulatorConList;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.fixture.Fixture;
 
 public class ComandoFineTest {
@@ -23,7 +22,7 @@ public class ComandoFineTest {
 	public void testPartitaConComandoFine() throws Exception {
 		List<String> righeDaLeggere = new ArrayList<>();
 		righeDaLeggere.add("fine");
-		Labirinto labirinto = new LabirintoBuilder()
+		Labirinto labirinto = Labirinto.newBuilder()
 				.addStanzaIniziale("LabCampusOne")
 				.addStanzaVincente("Biblioteca")
 				.addAdiacenza("LabCampusOne","Biblioteca","ovest")
@@ -38,7 +37,7 @@ public class ComandoFineTest {
 	@Test
 	public void testPartitaConComandoFineConList() {
 		List<String> righeDaLeggere = new ArrayList<>();
-		Labirinto labirinto = new LabirintoBuilder()
+		Labirinto labirinto = Labirinto.newBuilder()
 				.addStanzaIniziale("LabCampusOne")
 				.addStanzaVincente("Biblioteca")
 				.addAdiacenza("LabCampusOne","Biblioteca","ovest")

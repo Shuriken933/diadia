@@ -6,7 +6,7 @@ public class ComandoAiuto extends AbstractComando {
 		
 	static final private String NOME = "aiuto";
 	
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "posa", "prendi", "guarda", "interagisci"};
+	static final private String[] ELENCO_COMANDI = {"vai", "aiuto", "fine", "posa", "prendi", "guarda", "interagisci"};
 	
 	public ComandoAiuto(String[] elencoComandi) {
 		super.setNome(NOME);
@@ -14,8 +14,8 @@ public class ComandoAiuto extends AbstractComando {
 
 	@Override
 	public void esegui(Partita partita) {
-		for(int i=0; i< elencoComandi.length; i++) 
-			super.getIo().mostraMessaggio(elencoComandi[i]+" ");
+		for(int i=0; i< ELENCO_COMANDI.length; i++) 
+			super.getIo().mostraMessaggio(ELENCO_COMANDI[i]+" ");
 	}
 
 //	@Override

@@ -15,7 +15,7 @@ public class LabirintoBuilderTest {
 
 	@Before
 	public void setUp() throws Exception {
-		this.labirinto = new LabirintoBuilder()
+		this.labirinto = Labirinto.newBuilder()
 				.addStanzaIniziale(STANZA_INIZIALE)
 				.addStanzaVincente(STANZA_VINCENTE)
 				.addAttrezzo(NOME_ATTREZZO, 1)

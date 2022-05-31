@@ -1,5 +1,5 @@
 package it.uniroma3.diadia.ambienti;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +14,7 @@ public class LabirintoTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		this.labirinto = new LabirintoBuilder()
+		this.labirinto = Labirinto.newBuilder()
 				.addStanzaIniziale(STANZA_INIZIALE)
 				.addStanzaVincente(STANZA_VINCENTE)
 				.getLabirinto();

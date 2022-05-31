@@ -10,7 +10,6 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -28,7 +27,7 @@ public class ComandoPosaTest {
 	@Before
 	public void setUp() throws Exception {
 		this.io = new IOConsole();
-		this.labirinto = new LabirintoBuilder()
+		this.labirinto = Labirinto.newBuilder()
 				.addStanzaIniziale("stanzaIniziale")
 				.getLabirinto();
 		this.partita = new Partita(labirinto);

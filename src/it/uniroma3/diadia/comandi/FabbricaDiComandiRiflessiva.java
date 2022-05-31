@@ -6,8 +6,6 @@ import it.uniroma3.diadia.IO;
 
 public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 
-	//private IO io;
-
 	@SuppressWarnings("deprecation")
 	public AbstractComando costruisciComando(String istruzione, IO io) {
 
